@@ -20,7 +20,7 @@
 - **Backend** -> Python, Django Framework
 - **Frontend** -> HTML, CSS, Bootstrap
 - **Database** -> SQLite, Redis(for caching)
-- 
+
 ## Technical Choices
 
 - **Django Framework** -> for quick devlopment withing deadline, Django's **motto** says it all **“the framework for developers with deadlines”**
@@ -65,7 +65,7 @@
 
 - **Email**:- yashpatel7025@gmail.com
 - **call**: 7021875166, **whatsapp**:9730039951
-- 
+
 ## API Contract
 
 Send Email
