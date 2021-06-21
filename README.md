@@ -62,7 +62,7 @@
 - call: 7021875166, whatsapp:9730039951
 - 
 ## API Contract
-- ```bash
+- ```
 curl --location --request POST 'http://django-email-service-aus.centralindia.cloudapp.azure.com/send_email/' \
 --header 'Cookie: messages=.eJyLjlaKj88qzs-Lz00tLk5MT1XSMdAxMtVRcs1NzMxRKE7NK1EoLk1OBkqmlebkVCrF6gxKHbEAW75FtQ:1lvQ02:Vfu3RU9Qh3_JlHB8cTpZqM6y70Ptk99-N6OkK4bCsuU' \
 --form 'to_email="yashpatel7025@gmail.com"' \
