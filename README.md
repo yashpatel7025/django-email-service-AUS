@@ -6,7 +6,7 @@
 - so instead of relying on 1 service provider or platform we are providing customers a platform where multiple providers are integrated
 - **Backend** 
     * Backend of project mainly consist of 1 POST API which simply calls [multi-email-service-yashpatel-AUS](https://test.pypi.org/project/multi-email-service-yashpatel-AUS/) library to send email, and 1 GET API to view all sent emails and its status
-    * **Redis** is used: this is used to cache the emails sent for 1 hour, this is added bcoz one user usually comes back to 'view page' to view sent emails in past, keeping in mind that there would be many customers using this platform, to avoid redundent GET API calls to database the result is stored in cache for 1 hour
+    * **Redis** is used: this is used to cache sent emails, this is added bcoz one user usually comes back to 'view page' to view sent emails in past, keeping in mind that there would be many customers using this platform, to avoid redundent GET API calls to database the result is stored in cache for 1 hour
     * **Pagination** is added: pagination is added to get only top 10 recent emails sent, its very likely that user want to see only last email sent or last few emails
       
 - **Frontend** 
