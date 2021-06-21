@@ -62,6 +62,7 @@
 - call: 7021875166, whatsapp:9730039951
 - 
 ## API Contract
+Send Email
 ```
 curl --location --request POST 'http://django-email-service-aus.centralindia.cloudapp.azure.com/send_email/' \
 --header 'Cookie: messages=.eJyLjlaKj88qzs-Lz00tLk5MT1XSMdAxMtVRcs1NzMxRKE7NK1EoLk1OBkqmlebkVCrF6gxKHbEAW75FtQ:1lvQ02:Vfu3RU9Qh3_JlHB8cTpZqM6y70Ptk99-N6OkK4bCsuU' \
@@ -72,4 +73,9 @@ curl --location --request POST 'http://django-email-service-aus.centralindia.clo
 --form 'sent_via="3"' \
 --form 'status="1"' \
 --form 'TOKEN="ef16fd3e-d271-11eb-b8bc-0242ac130003"'
+```
+get sent emails
+
+```
+curl --location --request GET 'http://django-email-service-aus.centralindia.cloudapp.azure.com/view_sent_emails/?TOKEN=ef16fd3e-d271-11eb-b8bc-0242ac130003'
 ```
