@@ -6,15 +6,14 @@
 - so instead of relying on 1 service provider or platform we are providing customers a platform where multiple providers are integrated
 - **Backend** 
     * backend of project mainly consist of one POST API which simply calls [multi-email-service-yashpatel-AUS](https://test.pypi.org/project/multi-email-service-yashpatel-AUS/) library to send email, and GET API to view all sent emails and its status
-    * nn
-    * **redis** is used: this is used to cache the emails sent for 1 hour, this is added bcoz one user usually comes back to 'view page' to view past emails sent, and keeping in mind that there would be many customers using this platform, to avoid redundent GET API calls to database, the result is stored in cache for 1 hour
-    * **pagination** is added: pagination is added to get only top 10 recent emails sent, its very likely that user want to see only last email sent or last few emails 
+    * **Redis** is used: this is used to cache the emails sent for 1 hour, this is added bcoz one user usually comes back to 'view page' to view past emails sent, and keeping in mind that there would be many customers using this platform, to avoid redundent GET API calls to database, the result is stored in cache for 1 hour
+    * **Pagination** is added: pagination is added to get only top 10 recent emails sent, its very likely that user want to see only last email sent or last few emails 
       
 - **Frontend** 
 
-      - additionall there is capability added to view all sent emails and thier status on web portal from which user can see the status of all email sent and also the past sent emails
-      - 
-- additionally user can send email directly using email-form from web portal as well as email can be send using API client e.g postman, also all sent emails can be fetched by calling API using client
+    * Additionally there is capability added to view all sent emails and thier status on web portal from which user can see the status of all email sent and also the past sent emails
+  
+- Also user can send email directly using email-form from web portal as well as email can be send using API client e.g postman, also all sent emails can be fetched by calling API using client
 
 ## Tools/ Technology / Frameworks used
 
@@ -33,22 +32,22 @@
 
 ## Leftout implementation due to time constraints
 
-- unit tests
-- could not add **mailgun** and **mandrill** provider mentioned in project description as one of them was asking payment details on sign up and other do not support free emails like gmail.com and yahoo.com
+- Unit Tests
+- Could not add **mailgun** and **mandrill** provider mentioned in project description as one of them was asking payment details on sign up and other do not support free emails like gmail.com and yahoo.com
 
 ## Things i would have improved or added if had more time
 
 - **adding Registration and Login functionality** -> Currently, the application do not support multiple users/customers, so all the configuration related to all 3 providers are hardcoded at backend only for 1 particular user, email can be sent from 1 email id only
-- in future, differnt user can add thier API keys from all these integrated providers and save to this platform, and we can make this platform as "all in 1" kind of platform, developers could be the potential users for this platform as most of the time developers integrate one of the service to its software and it many times goes down and results in failure of delivering the emails
-- **adding proper Authentication** -> currently web_token and api_token are configured at backend directly to access APIs using web portal and using API client respectively, would have used JWT token authentication if we are sending emails by API only and not from frontend
-- **Storing extra information** -> storing the failure reason incase of email could not sent by any of the provider, which can be shown to user at frontend
+- In future, differnt user can add thier API keys from all these integrated providers and save to this platform, and we can make this platform as "all in 1" kind of platform, developers could be the potential users for this platform as most of the time developers integrate one of the service to its software and it many times goes down and results in failure of delivering the emails
+- **adding proper Authentication** -> Currently web_token and api_token are configured at backend directly to access APIs using web portal and using API client respectively, would have used JWT token authentication if we are sending emails by API only and not from frontend
+- **Storing extra information** -> Storing the failure reason incase of email could not sent by any of the provider, which can be shown to user at frontend
 
 ## Link to other code I'm particularly proud of
 
-- learned about **DevOps tools** -> **Jenkins**, **Ansible** and **Gunicorn**, **Nginx** etc while implementing this
-- codebase mostly has ansible implementation to deploy the django app to jenkins server and from there to multiple servers[dev,QA,prod], everything on one click
+- Learned about **DevOps tools** -> **Jenkins**, **Ansible** and **Gunicorn**, **Nginx** etc while implementing this
+- Codebase mostly has ansible implementation to deploy the django app to jenkins server and from there to multiple servers[dev,QA,prod], everything on one click
 - https://github.com/yashpatel7025/django_project_CICD_automation-using-github_actions-jenkins-ansible-azure_cloud
-- there are many projects/codebase that I'm proud of but most of them are private (as it was dveloped for organizations)
+- There are many projects/codebase that I'm proud of but most of them are private (as it was dveloped for organizations)
 
 ## Link to my Resume and Public Profile.
 
@@ -57,8 +56,8 @@
 
 ## Hosting
 
-- hosted on **Microsoft Azure**
-- can be accessed at-> http://django-email-service-aus.centralindia.cloudapp.azure.com/
+- Hosted on **Microsoft Azure**
+- Can be accessed at-> http://django-email-service-aus.centralindia.cloudapp.azure.com/
 - 
 ### Contact for any difficulties accessing the webapp
 
