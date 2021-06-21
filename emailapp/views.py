@@ -20,7 +20,7 @@ from django.urls import reverse
 # Create your views here.
 @api_view(['GET'])
 def redirect_home(request):
-	return redirect(reverse('send_email'))
+	return redirect(reverse('sent_emails_list_view') + f"?TOKEN={WEB_TOKEN}")
 
 @api_view(['GET'])
 @is_authenticated_to_view_email()
