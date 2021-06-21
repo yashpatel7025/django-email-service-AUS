@@ -47,8 +47,8 @@
 
 ## Link to your resume or public profile.
 
-- 
-- ![Public Profile](https://github.com/yashpatel7025)
+- [Resume](https://github.com/yashpatel7025/django-email-service-AUS/blob/main/Resume_Yash_Patel_SDE.pdf)
+- [Public Profile](https://github.com/yashpatel7025)
 
 ## Hosting
 
