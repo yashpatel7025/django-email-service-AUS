@@ -47,9 +47,8 @@
 
 ## Link to your resume or public profile.
 
-- Resume
-- Public Profile
-
+- 
+- ![Public Profile](https://github.com/yashpatel7025)
 
 ## Hosting
 
