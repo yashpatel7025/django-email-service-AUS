@@ -1,10 +1,8 @@
 # django-email-service-AUS
 
-access webapp from -> http://django-email-service-aus.centralindia.cloudapp.azure.com/
-
 ## description
 
-- django-email-service-AUS is email service which sends email via any of the service providers Amazon SES, Google SMTP or SendGrid, if one of the services goes down, it can quickly failover to a another provider without affecting customers, service uses yashi-multi-email-service-AUS library which take cares of sending emails via one of the service providers
+- django-email-service-AUS is email service which sends email via any of the service providers Amazon SES, Google SMTP or SendGrid using library called yashi-multi-email-service-AUS, user can select the defauly service provider to send email, if it fails it will failover to other provider
 - so instead of relying on 1 service provider or platform we are providing customers a platform where multiple providers are integrated
 - Backend -> 
       - backend of project mainly consist of one POST API which simply calls yashi-multi-email-service-AUS library to send email, and GET API to view all sent emails and its status
@@ -19,6 +17,15 @@ access webapp from -> http://django-email-service-aus.centralindia.cloudapp.azur
 - Frontend -> HTML, CSS, Bootstrap
 - Database -> MySQLite, Redis(for caching)
 
+## code archtecture 
+
+## technical choices
+
+- Django framework -> for quick devlopment withing deadline, Django's motto says it all “the framework for developers with deadlines”
+- SQLite -> as application has only one table which store emails sent, also SQLite is suitable for small applications like this
+-  HTML, CSS, Bootstrap -> haven't really done much frontend dev, these are only frameworks i have used in past other than JS
+-  Redis -> best out there, very fast, more data types supported when compared to many key-value data stores
+
 ## leftout implementation due to time constraints
 
 - unit tests
@@ -28,8 +35,7 @@ access webapp from -> http://django-email-service-aus.centralindia.cloudapp.azur
 
 - adding Registration and Login functionality -> Currently, the application do not support multiple users/customers, so all the configuration related to all 3 providers are hardcoded at backend only for 1 particular user, email can be sent from 1 email id only
 - in future, differnt user can add thier API keys from all these integrated providers and save to this platform, and we can make this platform as "all in 1" kind of platform, developers could be the potential users for this platform as most of the time developers integrate one of the service to its software and it many times goes down and results in failure of delivering the emails
-- adding proper Authentication -> currently web_token and api_token are configured at backend directly to access APIs using web portal and using API respectively, would have used JWT token authentication if we are sending emails by API only and not from frontend
-- functionality to attcach documents(pdf,images), adding cc, bcc data in email
+- adding proper Authentication -> currently web_token and api_token are configured at backend directly to access APIs using web portal and using API client respectively, would have used JWT token authentication if we are sending emails by API only and not from frontend
 - Storing extra information -> storing the failure reason incase of email could not sent by any of the provider, which can be shown to user at frontend
 
 ## Link to other code I'm particularly proud of
@@ -45,19 +51,31 @@ access webapp from -> http://django-email-service-aus.centralindia.cloudapp.azur
 - Public Profile
 
 
-### Contact for any difficulties accessing the webapp or related to setup
-
-- email:- yashpatel7025@gmail.com
-- call: 7021875166, whatsapp:9730039951
-
 ## Hosting
 
 - hosted on Microsoft Azure
 - can be accessed at-> http://django-email-service-aus.centralindia.cloudapp.azure.com/
+- 
+### Contact for any difficulties accessing the webapp or related to setup
+
+- email:- yashpatel7025@gmail.com
+- call: 7021875166, whatsapp:9730039951
+- 
+## API Contract
+- ```bash
+curl --location --request POST 'http://django-email-service-aus.centralindia.cloudapp.azure.com/send_email/' \
+--header 'Cookie: messages=.eJyLjlaKj88qzs-Lz00tLk5MT1XSMdAxMtVRcs1NzMxRKE7NK1EoLk1OBkqmlebkVCrF6gxKHbEAW75FtQ:1lvQ02:Vfu3RU9Qh3_JlHB8cTpZqM6y70Ptk99-N6OkK4bCsuU' \
+--form 'to_email="yashpatel7025@gmail.com"' \
+--form 'from_email="yashwadia7025@gmail.com"' \
+--form 'subject="Job application"' \
+--form 'body_text="Hi,
+
+How are u?
 
 
-### Demo
-
-<img src="./demo-images/1.png" width="1000" height="430">
----
-<img src="./demo-images/2.png" width="1000" height="430">
+Regards,
+Yash"' \
+--form 'sent_via="3"' \
+--form 'status="1"' \
+--form 'TOKEN="ef16fd3e-d271-11eb-b8bc-0242ac130003"'
+```
