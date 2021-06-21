@@ -48,6 +48,7 @@
           <table>
             <thead>
               <tr class="table100-head">
+                <th class="column1">Id</th>
                 <th class="column1">Email From</th>
                 <th class="column1">Email To</th>
                 <th class="column1">Subject</th>
@@ -62,6 +63,7 @@
             <tbody>
               {% for email in emails_sent %}
                 <tr>
+                   <td class="column1">{{email.id}}</td>
                   <td class="column1">{{email.from_email}}</td>
                   <td class="column1">{{email.from_email}}</td>
                   <td class="column1">{{email.subject}}</td>

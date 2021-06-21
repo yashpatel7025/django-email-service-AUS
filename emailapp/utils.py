@@ -1,4 +1,6 @@
 from django.utils import timezone
+from rest_framework.response import Response
+from django_AUS.settings import API_TOKEN, WEB_TOKEN
 
 def get_service_name_or_number(from_number=None, from_service=None):
 	if from_number:
@@ -18,3 +20,32 @@ def get_service_name_or_number(from_number=None, from_service=None):
 
 def get_localtime():
 	return timezone.localtime(timezone.now())
+
+
+def is_authenticated_to_view_email():
+    def decorator(view_func):
+        def wrapper_func(request, *args, **kwargs):
+            token = request.GET.get("TOKEN")
+            # return 403 if token is not passed 
+            if not token: 
+                return Response({"message":'Token is missing !!'},status=403)
+            if token not in [API_TOKEN, WEB_TOKEN]:
+                return Response({"message":'invalid token !!'},status=403)
+
+            return view_func(request, token==WEB_TOKEN, *args, **kwargs)
+        return wrapper_func
+    return decorator
+
+
+def is_authenticated_to_send_email():
+    def decorator(view_func):
+        def wrapper_func(self, request, *args, **kwargs):
+            token = request.POST.get("TOKEN")
+            # return 403 if token is not passed 
+            if not token: 
+                return Response({"message":'Token is missing !!'},status=403)
+            if token not in [API_TOKEN, WEB_TOKEN]:
+                return Response({"message":'invalid token !!'},status=403)
+            return view_func(self, request, token==WEB_TOKEN, *args, **kwargs)
+        return wrapper_func
+    return decorator

@@ -4,3 +4,4 @@ django-crispy-forms
 django_forms_bootstrap
 django-bootstrap4
 python-dotenv
+django-redis

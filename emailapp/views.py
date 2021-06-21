@@ -5,26 +5,51 @@ from .models import *
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from rest_framework.response import Response
-from .utils import get_service_name_or_number
+from .utils import *
 from yashi_multi_email_service.impl.EmailManagerService import EmailManagerService
-from django_AUS.settings import YASHI_MULTI_EMAIL_SERVICE_CONFIG
+from django_AUS.settings import YASHI_MULTI_EMAIL_SERVICE_CONFIG, API_TOKEN, WEB_TOKEN
 from django.views.decorators.csrf import csrf_exempt
-import json
 from django.http import JsonResponse
-# Create your views here.
+from rest_framework.decorators import api_view, authentication_classes
+from django.core.cache import cache
+from rest_framework.pagination import PageNumberPagination
+from .serializers import EmailSerializer
+from django_AUS import settings
+from django.urls import reverse
 
-def get_email_list(request):
-	context={
-	         'emails_sent': Email.objects.all().order_by("-created")
-	         }
-	return render(request,'emails_list_view.html',context)
+# Create your views here.
+@api_view(['GET'])
+def redirect_home(request):
+	return redirect(reverse('send_email'))
+
+@api_view(['GET'])
+@is_authenticated_to_view_email()
+def get_email_list(request, is_from_web):
+    cache_name = "get_sent_emails_user_id_" + str(1)
+    if(cache_name in cache):
+    	#cache hit
+        sent_emails = cache.get(cache_name)
+    else:
+        #cache miss
+        sent_emails = Email.objects.all().order_by("-created")
+        cache.set(cache_name, sent_emails, timeout=settings.DEFAULT_TIMEOUT)
+    paginator = PageNumberPagination()
+    page = paginator.paginate_queryset(sent_emails, request)
+    if is_from_web:
+    	context={
+             'emails_sent': page
+            }
+    	return render(request,'emails_list_view.html',context)
+    serialized_data = EmailSerializer(page, many=True).data
+    return paginator.get_paginated_response(serialized_data)
+    
 
 class EmailAPIView(APIView):
 
 	authentication_classes = []
 
 	@csrf_exempt
-	def get(self, request, id=None):
+	def get(self, request):
 		email_form = EmailForm()
 		context = {
 		        'email_form': email_form,
@@ -32,9 +57,9 @@ class EmailAPIView(APIView):
 		return render(request,'email_form.html',context)
 
 	@csrf_exempt
-	def post(self, request):
+	@is_authenticated_to_send_email()
+	def post(self, request, is_from_web):
 		#when form submitted
-		is_from_outside_app = YASHI_MULTI_EMAIL_SERVICE_CONFIG.get("API_TOKEN") == request.POST.get("API_TOKEN")
 		email_form = EmailForm(request.POST)
 		if email_form.is_valid():
 			YASHI_MULTI_EMAIL_SERVICE_CONFIG["DEFAULT_SERVICE"] = get_service_name_or_number(from_number=email_form.cleaned_data['sent_via'])
@@ -52,14 +77,14 @@ class EmailAPIView(APIView):
 			email_obj.sent_via = get_service_name_or_number(from_service=sent_via_service) if sent_via_service else None
 			email_obj.save()
 			messages.success(request, f'Email sent successfully')
-			if is_from_outside_app:
-				return JsonResponse({'message':'Email sent successfully',"status": 200})
-			return redirect('sent_emails_list_view')
+			if is_from_web:
+				return redirect(reverse('sent_emails_list_view') + f"?TOKEN={request.POST['TOKEN']}")
+			return JsonResponse({'message':'Email sent successfully',"status": 200})
 		#if not valid..return same form with errors
 		context={
 	         'email_form':email_form
 	           }
-		if is_from_outside_app:
-			return JsonResponse({'errors':dict(email_form.errors.items()),"status": 400})
-		return render(request,'email_form.html',context)
+		if is_from_web:
+			return render(request,'email_form.html',context)
+		return JsonResponse({'errors':dict(email_form.errors.items()),"status": 400})
 		

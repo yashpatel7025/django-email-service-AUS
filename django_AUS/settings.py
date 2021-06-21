@@ -17,7 +17,6 @@ from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 ENV_PATH = os.path.join(os.path.dirname(__file__), '.env')
-print(ENV_PATH)
 load_dotenv(dotenv_path=ENV_PATH)
 
 # Quick-start development settings - unsuitable for production
@@ -94,6 +93,26 @@ DATABASES = {
     }
 }
 
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient"
+        },
+        "KEY_PREFIX": "rdb_"
+      }
+    }
+
+DEFAULT_TIMEOUT = 60*60
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+}
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -143,9 +162,10 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+API_TOKEN = os.environ.get("API_TOKEN")
+WEB_TOKEN =  os.environ.get("WEB_TOKEN")
 
 YASHI_MULTI_EMAIL_SERVICE_CONFIG = {
-           "DEFAULT_SERVICE":  os.environ.get("DEFAULT_SERVICE"), # available services -> "amazon_SES" , "google_SMTP", "send_grid"
             #ses
             "USERNAME_SMTP" : os.environ.get("USERNAME_SMTP"),
             "PASSWORD_SMTP" : os.environ.get("PASSWORD_SMTP"),
@@ -156,6 +176,5 @@ YASHI_MULTI_EMAIL_SERVICE_CONFIG = {
             "SENDGRID_API_kEY" : os.environ.get("SENDGRID_API_kEY"),
             #general for all 3 services(assumig sending email is same for all services)
             "FROM_EMAIL": os.environ.get("FROM_EMAIL"),
-            "FROM_EMAIL_NAME": os.environ.get("FROM_EMAIL_NAME"),
-            "API_TOKEN" : os.environ.get("API_TOKEN")
+            "FROM_EMAIL_NAME": os.environ.get("FROM_EMAIL_NAME")
         }
