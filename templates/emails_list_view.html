@@ -1,0 +1,107 @@
+{% load static %}
+<html>
+<head>
+	<title></title>
+
+<!--===============================================================================================-->  
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="{% static '/table3/vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="{% static '/table3/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="{% static '/table3/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="{% static '/table3/vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="{% static '/table3/vendor/perfect-scrollbar/perfect-scrollbar.css' %}">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="{% static '/table3/css/util.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static '/table3/css/main.css' %}">
+  
+<!--===============================================================================================-->
+ 
+
+</head>
+<body>
+
+
+{% if messages %}
+  {% for message in messages %}
+    <div id="messages" class="container">
+      <div class="alert alert-{{ message.tags }} alert-dismissible text-center" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        {{ message }}
+      </div>
+    </div>
+  {% endfor %}
+{% endif %}
+<br>
+
+<div class="limiter">
+    <div class="container-table100">
+      <div class="wrap-table100">
+        <center class="table100"> <div class="badge badge-pill badge-light " align="center"> <h2>Your sent Emails</h2></center>
+
+        <br><br>
+          <table>
+            <thead>
+              <tr class="table100-head">
+                <th class="column1">Email From</th>
+                <th class="column1">Email To</th>
+                <th class="column1">Subject</th>
+                
+                
+                <th class="column1">Body Text</th>
+                <th class="column1">Sent Via</th>
+                <th class="column1">Sent</th>
+                <th class="column1">sent at</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for email in emails_sent %}
+                <tr>
+                  <td class="column1">{{email.from_email}}</td>
+                  <td class="column1">{{email.from_email}}</td>
+                  <td class="column1">{{email.subject}}</td>
+                  <td class="column1" >{{email.body_text}}</td>
+                  <td class="column1">{{email.get_sent_via_display}}</td>
+
+                  {% if email.status %}
+                 <td class="column1"><i class="fa fa-check" style="font-size:48px;color:green"></i></td>
+                 {% else %}
+                  <td class="column1"><i class="fa fa-close" style="font-size:48px;color:red"></i></td>
+
+                 {% endif %}
+                <td class="column1">{{email.created}}</td>
+              
+
+                </tr>
+                
+           {% endfor %}
+                
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  
+ <script src='/static/cd.js'></script>
+<!--===============================================================================================-->  
+  <script src="/static/table3/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+  <script src="/static/table3/vendor/bootstrap/js/popper.js"></script>
+  <script src="/static/table3/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+  <script src="/static/table3/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+  <script src="/static/table3/js/main.js"></script>
+
+       
+
+</body>
+</html>
