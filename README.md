@@ -68,13 +68,7 @@ curl --location --request POST 'http://django-email-service-aus.centralindia.clo
 --form 'to_email="yashpatel7025@gmail.com"' \
 --form 'from_email="yashwadia7025@gmail.com"' \
 --form 'subject="Job application"' \
---form 'body_text="Hi,
-
-How are u?
-
-
-Regards,
-Yash"' \
+--form 'body_text="Hi, How are u? Regards,Yash"' \
 --form 'sent_via="3"' \
 --form 'status="1"' \
 --form 'TOKEN="ef16fd3e-d271-11eb-b8bc-0242ac130003"'
