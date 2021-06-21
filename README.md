@@ -5,9 +5,9 @@
 - ```django-email-service-AUS``` is email service which sends email via any of the service providers **Amazon SES**, **Google SMTP** or **SendGrid** using library called [multi-email-service-yashpatel-AUS](https://test.pypi.org/project/multi-email-service-yashpatel-AUS/), user can select the default service provider to send email, if it fails it will failover to other provider
 - so instead of relying on 1 service provider or platform we are providing customers a platform where multiple providers are integrated
 - **Backend** 
-    * backend of project mainly consist of one POST API which simply calls [multi-email-service-yashpatel-AUS](https://test.pypi.org/project/multi-email-service-yashpatel-AUS/) library to send email, and GET API to view all sent emails and its status
-    * **Redis** is used: this is used to cache the emails sent for 1 hour, this is added bcoz one user usually comes back to 'view page' to view past emails sent, and keeping in mind that there would be many customers using this platform, to avoid redundent GET API calls to database, the result is stored in cache for 1 hour
-    * **Pagination** is added: pagination is added to get only top 10 recent emails sent, its very likely that user want to see only last email sent or last few emails 
+    * Backend of project mainly consist of 1 POST API which simply calls [multi-email-service-yashpatel-AUS](https://test.pypi.org/project/multi-email-service-yashpatel-AUS/) library to send email, and 1 GET API to view all sent emails and its status
+    * **Redis** is used: this is used to cache the emails sent for 1 hour, this is added bcoz one user usually comes back to 'view page' to view sent emails in past, keeping in mind that there would be many customers using this platform, to avoid redundent GET API calls to database the result is stored in cache for 1 hour
+    * **Pagination** is added: pagination is added to get only top 10 recent emails sent, its very likely that user want to see only last email sent or last few emails
       
 - **Frontend** 
 
@@ -20,9 +20,7 @@
 - **Backend** -> Python, Django Framework
 - **Frontend** -> HTML, CSS, Bootstrap
 - **Database** -> SQLite, Redis(for caching)
-
-## Code Architecture 
-
+- 
 ## Technical Choices
 
 - **Django Framework** -> for quick devlopment withing deadline, Django's **motto** says it all **“the framework for developers with deadlines”**
@@ -33,9 +31,9 @@
 ## Leftout implementation due to time constraints
 
 - Unit Tests
-- Could not add **mailgun** and **mandrill** provider mentioned in project description as one of them was asking payment details on sign up and other do not support free emails like gmail.com and yahoo.com
+- Could not add **Mailgun** and **Mandrill** provider mentioned in project description as one of them was asking payment details on sign up and other do not support free emails like @gmail.com and @yahoo.com
 
-## Things i would have improved or added if had more time
+## Things I would have improved or added if had more time
 
 - **adding Registration and Login functionality** -> Currently, the application do not support multiple users/customers, so all the configuration related to all 3 providers are hardcoded at backend only for 1 particular user, email can be sent from 1 email id only
 - In future, differnt user can add thier API keys from all these integrated providers and save to this platform, and we can make this platform as "all in 1" kind of platform, developers could be the potential users for this platform as most of the time developers integrate one of the service to its software and it many times goes down and results in failure of delivering the emails
@@ -58,7 +56,11 @@
 
 - Hosted on **Microsoft Azure**
 - Can be accessed at-> http://django-email-service-aus.centralindia.cloudapp.azure.com/
-- 
+
+## link to multi-email-service-yashpatel-AUS
+
+- https://github.com/yashpatel7025/yashi-multi-email-service-AUS
+
 ### Contact for any difficulties accessing the webapp
 
 - **Email**:- yashpatel7025@gmail.com
