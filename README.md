@@ -35,8 +35,8 @@
 
 ## Things I would have improved or added if had more time
 
-- **adding Registration and Login functionality** -> Currently, the application do not support multiple users/customers, so all the configuration related to all 3 providers are hardcoded at backend only for 1 particular user, email can be sent from 1 email id only
-- In future, differnt user can add thier API keys from all these integrated providers and save to this platform, and we can make this platform as "all in 1" kind of platform, developers could be the potential users for this platform as most of the time developers integrate one of the service to its software and it many times goes down and results in failure of delivering the emails
+- **adding Registration and Login functionality** -> Currently, the application do not support multiple users/customers, so all the configuration related to all 3 providers are configured at backend only for 1 particular user, email can be sent from 1 email id only
+- In future, differnt user can add thier API keys from all these integrated providers and save to this platform, and we can make this platform as "all in 1" kind of platform, developers could be the potential users for this platform as most of the time developers integrate one of the service to its software,many times  it goes down and results in failure of delivering the emails
 - **adding proper Authentication** -> Currently web_token and api_token are configured at backend directly to access APIs using web portal and using API client respectively, would have used JWT token authentication if we are sending emails by API only and not from frontend
 - **Storing extra information** -> Storing the failure reason incase of email could not sent by any of the provider, which can be shown to user at frontend
 
