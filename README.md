@@ -14,7 +14,7 @@
     * Additionally there is capability added to view all sent emails and thier status on web portal from which user can see the status of all email sent and also the past sent emails
     * irrespective of email id passed in ```from_email``` field, email will be sent from ```yashwadia7025@gmail.com``` currently
   
-- Also user can send email directly using email-form from web portal as well as email can be send using API client e.g postman, also all sent emails can be fetched by calling API using client
+- Also user can send email directly using email-form from web portal as well as email can be send using API client e.g Postman,all sent emails can also be fetched by calling API from API client
 
 ## Tools/ Technology / Frameworks used
 
@@ -50,7 +50,7 @@
 
 ## Link to my Resume and Public Profile.
 
-- [Resume](https://github.com/yashpatel7025/django-email-service-AUS/blob/main/Resume_Yash_Patel_SDE.pdf)
+- [Resume](./extra/Resume_Yash_Patel_SDE.pdf)
 - [Public Profile](https://github.com/yashpatel7025)
 
 ## Hosting
